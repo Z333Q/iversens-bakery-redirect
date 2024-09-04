@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cake Price</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #333;
+        }
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e91e63;
+        }
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #4caf50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thank You for Your Order!</h1>
+        <p>Your estimated cake price is: <span class="price" id="cake-price"></span></p>
+        <a href="#" class="button" id="payment-link">Proceed to Payment</a>
+    </div>
+
+    <script>
+        // Capture the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const cakePrice = urlParams.get('price');
+        const orderId = urlParams.get('order_id');
+
+        // Display the price
+        document.getElementById('cake-price').textContent = `$${cakePrice}`;
+
+        // Generate the Square payment link
+        const squarePaymentLink = `https://squareup.com/pay/${orderId}?amount=${cakePrice}`;
+        document.getElementById('payment-link').href = squarePaymentLink;
+    </script>
+</body>
+</html>
